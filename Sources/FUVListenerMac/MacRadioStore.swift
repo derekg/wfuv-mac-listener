@@ -134,7 +134,8 @@ final class MacRadioStore: ObservableObject {
         artworkOrder.removeAll { $0 == key }
         artworkOrder.append(key)
         while artworkOrder.count > 24 {
-            let removed = artworkOrder.removeFirst()
+            let index = artworkOrder.firstIndex { $0 != currentKey } ?? 0
+            let removed = artworkOrder.remove(at: index)
             artwork.removeValue(forKey: removed)
         }
     }
@@ -171,6 +172,7 @@ final class MacRadioStore: ObservableObject {
                     if item.status == .failed {
                         self?.isPlaying = false
                         self?.message = "Stream unavailable. Try again in a moment."
+                        self?.player.replaceCurrentItem(with: nil)
                     }
                 }
             }

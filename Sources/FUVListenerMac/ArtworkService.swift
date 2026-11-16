@@ -5,8 +5,6 @@ import UniformTypeIdentifiers
 
 /// Looks up cover art only when the recording and artist match the broadcast metadata.
 actor ArtworkService {
-    static let shared = ArtworkService()
-
     private struct SearchResponse: Decodable { let recordings: [Recording] }
     private struct Recording: Decodable {
         let title: String
@@ -104,17 +102,9 @@ actor ArtworkService {
     private var pinnedDigests = Set<String>()
     private let cacheDirectory: URL
 
-    init(cacheDirectory: URL? = nil) {
-        if let cacheDirectory {
-            self.cacheDirectory = cacheDirectory
-        } else {
-            let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            for oldName in ["AlbumArtwork", "AlbumArtworkV2", "AlbumArtworkV3"] {
-                try? FileManager.default.removeItem(at: support.appendingPathComponent(oldName, isDirectory: true))
-            }
-            self.cacheDirectory = support.appendingPathComponent("AlbumArtworkV4", isDirectory: true)
-        }
-        try? FileManager.default.createDirectory(at: self.cacheDirectory, withIntermediateDirectories: true)
+    init(cacheDirectory: URL) {
+        self.cacheDirectory = cacheDirectory
+        try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
     }
 
     func imageData(title: String, artist: String, preferredURL: URL? = nil,

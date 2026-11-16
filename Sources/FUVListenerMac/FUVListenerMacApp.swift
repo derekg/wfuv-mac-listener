@@ -37,26 +37,28 @@ private struct MenuBarControls: View {
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
-        if let track = radio.current, track.isMusic {
-            Text(track.title)
-            Text(track.artist)
-        } else {
-            Text("WFUV 90.7 FM")
+        Group {
+            if let track = radio.current, track.isMusic {
+                Text(track.title)
+                Text(track.artist)
+            } else {
+                Text("WFUV 90.7 FM")
+            }
+            Divider()
+            Button(radio.isPlaying ? "Pause Live Radio" : "Play Live Radio",
+                   systemImage: radio.isPlaying ? "pause.fill" : "play.fill") {
+                radio.togglePlayback()
+            }
+            Button("Open Player", systemImage: "macwindow") {
+                openWindow(id: "listener")
+                NSApp.activate(ignoringOtherApps: true)
+            }
+            Button("Refresh Song", systemImage: "arrow.clockwise") {
+                Task { await radio.refresh() }
+            }
+            Divider()
+            Button("Quit FUV Listener") { NSApp.terminate(nil) }
         }
-        Divider()
-        Button(radio.isPlaying ? "Pause Live Radio" : "Play Live Radio",
-               systemImage: radio.isPlaying ? "pause.fill" : "play.fill") {
-            radio.togglePlayback()
-        }
-        Button("Open Player", systemImage: "macwindow") {
-            openWindow(id: "listener")
-            NSApp.activate(ignoringOtherApps: true)
-        }
-        Button("Refresh Song", systemImage: "arrow.clockwise") {
-            Task { await radio.refresh() }
-        }
-        Divider()
-        Button("Quit FUV Listener") { NSApp.terminate(nil) }
         .onAppear { Task { await radio.refresh() } }
     }
 }

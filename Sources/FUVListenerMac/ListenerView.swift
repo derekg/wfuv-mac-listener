@@ -58,6 +58,7 @@ struct ListenerView: View {
 
     private var playerCard: some View {
         let track = radio.current
+        let song = track?.isMusic == true ? track : nil
         return VStack(alignment: .leading, spacing: 18) {
             HStack(spacing: 7) {
                 Circle().fill(Palette.red).frame(width: 7, height: 7)
@@ -73,18 +74,18 @@ struct ListenerView: View {
 
             HStack(alignment: .center, spacing: 16) {
                 CoverArt(data: radio.imageDataForCurrent(),
-                         title: track?.title ?? "Independent radio",
-                         artist: track?.artist ?? "New York",
+                         title: song?.title ?? "Independent radio",
+                         artist: song?.artist ?? "New York",
                          size: 116)
                     .shadow(color: .black.opacity(0.17), radius: 13, y: 7)
 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(track?.isMusic == true ? track!.title : "Listen live")
+                    Text(song?.title ?? "Listen live")
                         .font(.system(size: 22, weight: .bold, design: .serif))
                         .foregroundStyle(.white)
                         .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(3)
-                    Text(track?.isMusic == true ? track!.artist : "Music discovery on 90.7 FM")
+                    Text(song?.artist ?? "Music discovery on 90.7 FM")
                         .font(.system(size: 13))
                         .foregroundStyle(.white.opacity(0.75))
                         .fixedSize(horizontal: false, vertical: true)
@@ -106,7 +107,7 @@ struct ListenerView: View {
                 .controlSize(.large)
                 .accessibilityLabel(radio.isPlaying ? "Pause WFUV radio" : "Play WFUV radio")
 
-                if let track, track.isMusic {
+                if let track = song {
                     Button(action: radio.toggleCurrentFavorite) {
                         Image(systemName: isCurrentFavorite ? "heart.fill" : "heart")
                             .font(.system(size: 18))

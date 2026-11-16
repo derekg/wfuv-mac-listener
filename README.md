@@ -4,9 +4,17 @@ A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). It plays the 
 
 This is an independent fan project made in support of WFUV, a great public radio resource. It is not affiliated with or endorsed by WFUV. [Support the station](https://wfuv.org/support).
 
+## Screenshots
+
+| Live player | Favorites |
+| :---: | :---: |
+| <img src="docs/images/player.jpg" alt="FUV Listener playing WFUV with current song and recent tracks" width="320"> | <img src="docs/images/favorites.jpg" alt="FUV Listener showing a favorited song" width="320"> |
+
 ## Build
 
 Requires macOS 14 or later and Xcode 27. Open `FUVListenerMac.xcodeproj`, select the **FUVListenerMac** scheme and **My Mac**, then Run. To regenerate the Xcode project after editing `project.yml`, run `xcodegen generate` (XcodeGen 2.46 or later).
+
+To launch an installed app from Terminal, use `open "/path/to/FUV Listener.app"`. An `.app` is a bundle directory, so running its path directly in a shell will fail.
 
 The app has no account, analytics, ads, or embedded credentials. Favorites are stored in local user defaults. Cover art is fetched from the station when available, then matched against MusicBrainz and Cover Art Archive. The disk cache is limited to 80 MB and 400 images; the view model retains at most 24 images in memory. Images are resized to at most 600 pixels before caching. The feed refreshes every 45 seconds while the window is visible, or on demand with **⌘R**. Audio continues if you close the window; quit the app to stop playback. The app uses the high quality WFUV stream.
 

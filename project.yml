@@ -1,0 +1,25 @@
+name: FUVListenerMac
+options:
+  bundleIdPrefix: com.derekg
+settings:
+  base:
+    MACOSX_DEPLOYMENT_TARGET: '14.0'
+    SWIFT_VERSION: '5.0'
+    CODE_SIGNING_ALLOWED: NO
+targets:
+  FUVListenerMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/FUVListenerMac
+      - path: Assets.xcassets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.derekg.FUVListenerMac
+        PRODUCT_NAME: FUV Listener
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: FUV Listener
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.music
+        INFOPLIST_KEY_NSHumanReadableCopyright: Fan-made app. Not affiliated with WFUV.
+    dependencies: []

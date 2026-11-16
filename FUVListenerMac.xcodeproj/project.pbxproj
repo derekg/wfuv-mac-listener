@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		44486F9E59DDD7550713A0F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9AB93F24C46F77B71BD237D /* Assets.xcassets */; };
+		5CE00DAD19F9CF41C6A880AF /* ArtworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFCA50E5385B2D5B01E8DD /* ArtworkService.swift */; };
+		85AAD9BF38386EC8804819D5 /* ListenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A4D557F716E6904EC5361 /* ListenerView.swift */; };
+		90F3F0BC5FFE514980F2D90B /* FUVListenerMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D5756CBB03B5867F7438D /* FUVListenerMacApp.swift */; };
+		D3B96755003C713C2580F814 /* MacRadioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */; };
+		EA15A0CE5A17E7D604C8378E /* WFUVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DC9CE5A779769E94D9DC3 /* WFUVService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		096DC9CE5A779769E94D9DC3 /* WFUVService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFUVService.swift; sourceTree = "<group>"; };
+		1F0D5756CBB03B5867F7438D /* FUVListenerMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FUVListenerMacApp.swift; sourceTree = "<group>"; };
+		6AEFCA50E5385B2D5B01E8DD /* ArtworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkService.swift; sourceTree = "<group>"; };
+		76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacRadioStore.swift; sourceTree = "<group>"; };
+		8D1A4D557F716E6904EC5361 /* ListenerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerView.swift; sourceTree = "<group>"; };
+		C9304D2478AD2D6FF76D9E08 /* FUVListenerMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FUVListenerMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9AB93F24C46F77B71BD237D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2BE372460AF529F1C7E5C669 /* FUVListenerMac */ = {
+			isa = PBXGroup;
+			children = (
+				6AEFCA50E5385B2D5B01E8DD /* ArtworkService.swift */,
+				1F0D5756CBB03B5867F7438D /* FUVListenerMacApp.swift */,
+				8D1A4D557F716E6904EC5361 /* ListenerView.swift */,
+				76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */,
+				096DC9CE5A779769E94D9DC3 /* WFUVService.swift */,
+			);
+			name = FUVListenerMac;
+			path = Sources/FUVListenerMac;
+			sourceTree = "<group>";
+		};
+		35F29914C6F635D3730CC32D = {
+			isa = PBXGroup;
+			children = (
+				D9AB93F24C46F77B71BD237D /* Assets.xcassets */,
+				2BE372460AF529F1C7E5C669 /* FUVListenerMac */,
+				8AC00C4AEE692AC4E43D3B08 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8AC00C4AEE692AC4E43D3B08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9304D2478AD2D6FF76D9E08 /* FUVListenerMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2FEA7719C3A78F185D37B33B /* FUVListenerMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 954ACF1E351295AF70D35477 /* Build configuration list for PBXNativeTarget "FUVListenerMac" */;
+			buildPhases = (
+				9EF9BBDD67605F21071C0A81 /* Sources */,
+				D79A46648491F4F879E84FB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FUVListenerMac;
+			packageProductDependencies = (
+			);
+			productName = FUVListenerMac;
+			productReference = C9304D2478AD2D6FF76D9E08 /* FUVListenerMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15604F9D1C900D5235C1A4AA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 7E146C5BC32246ED72B72E09 /* Build configuration list for PBXProject "FUVListenerMac" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 35F29914C6F635D3730CC32D;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8AC00C4AEE692AC4E43D3B08 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FEA7719C3A78F185D37B33B /* FUVListenerMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D79A46648491F4F879E84FB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44486F9E59DDD7550713A0F8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9EF9BBDD67605F21071C0A81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CE00DAD19F9CF41C6A880AF /* ArtworkService.swift in Sources */,
+				90F3F0BC5FFE514980F2D90B /* FUVListenerMacApp.swift in Sources */,
+				85AAD9BF38386EC8804819D5 /* ListenerView.swift in Sources */,
+				D3B96755003C713C2580F814 /* MacRadioStore.swift in Sources */,
+				EA15A0CE5A17E7D604C8378E /* WFUVService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1E255BA09E7AD34A8B99843D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "FUV Listener";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Fan-made app. Not affiliated with WFUV.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.derekg.FUVListenerMac;
+				PRODUCT_NAME = "FUV Listener";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2A9606F76F7564338E5249A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4BBAD43A4A6A8D35D7E24244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E3E266A81501A274E94B4F72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "FUV Listener";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Fan-made app. Not affiliated with WFUV.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.derekg.FUVListenerMac;
+				PRODUCT_NAME = "FUV Listener";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7E146C5BC32246ED72B72E09 /* Build configuration list for PBXProject "FUVListenerMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A9606F76F7564338E5249A1 /* Debug */,
+				4BBAD43A4A6A8D35D7E24244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		954ACF1E351295AF70D35477 /* Build configuration list for PBXNativeTarget "FUVListenerMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3E266A81501A274E94B4F72 /* Debug */,
+				1E255BA09E7AD34A8B99843D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15604F9D1C900D5235C1A4AA /* Project object */;
+}

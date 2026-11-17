@@ -9,6 +9,7 @@ final class MacRadioStore: ObservableObject {
     @Published private(set) var favorites: [Song] = []
     @Published private(set) var artwork: [String: Data] = [:]
     @Published private(set) var isPlaying = false
+    @Published private(set) var isLiveAudio = false
     @Published private(set) var isRefreshing = false
     @Published private(set) var lastChecked: Date?
     @Published var message: String?
@@ -34,7 +35,9 @@ final class MacRadioStore: ObservableObject {
         player.automaticallyWaitsToMinimizeStalling = true
         playStatus = player.observe(\.timeControlStatus, options: [.new]) { [weak self] player, _ in
             Task { @MainActor [weak self] in
-                if player.timeControlStatus == .playing { self?.message = nil }
+                guard let self else { return }
+                self.isLiveAudio = self.isPlaying && player.timeControlStatus == .playing
+                if self.isLiveAudio { self.message = nil }
             }
         }
     }
@@ -162,23 +165,30 @@ final class MacRadioStore: ObservableObject {
     func togglePlayback() {
         if isPlaying {
             player.pause()
+            // Radio is live-only: discard the old playhead and buffered audio.
+            player.replaceCurrentItem(with: nil)
+            itemStatus = nil
             isPlaying = false
+            isLiveAudio = false
             return
         }
-        if player.currentItem == nil {
-            let item = AVPlayerItem(url: WFUVService.highQualityStreamURL)
-            itemStatus = item.observe(\.status, options: [.new]) { [weak self] item, _ in
-                Task { @MainActor [weak self] in
-                    if item.status == .failed {
-                        self?.isPlaying = false
-                        self?.message = "Stream unavailable. Try again in a moment."
-                        self?.player.replaceCurrentItem(with: nil)
-                    }
+        // Always create a fresh item so Play reconnects to the live broadcast.
+        let item = AVPlayerItem(url: WFUVService.highQualityStreamURL)
+        itemStatus = item.observe(\.status, options: [.new]) { [weak self] item, _ in
+            Task { @MainActor [weak self] in
+                guard let self, self.player.currentItem === item else { return }
+                if item.status == .failed {
+                    self.isPlaying = false
+                    self.isLiveAudio = false
+                    self.message = "Stream unavailable. Try again in a moment."
+                    self.player.replaceCurrentItem(with: nil)
                 }
             }
-            player.replaceCurrentItem(with: item)
         }
+        player.replaceCurrentItem(with: item)
         player.play()
         isPlaying = true
+        isLiveAudio = player.timeControlStatus == .playing
+        Task { await refresh() }
     }
 }

@@ -128,7 +128,7 @@ struct ListenerView: View {
                     .help("Find on Spotify")
                 }
                 Spacer(minLength: 0)
-                Text(radio.isPlaying ? "LIVE" : "90.7 FM")
+                Text(radio.isLiveAudio ? "LIVE" : radio.isPlaying ? "CONNECTING" : "90.7 FM")
                     .font(.system(size: 10, weight: .bold, design: .rounded))
                     .tracking(1)
                     .foregroundStyle(.white.opacity(0.55))

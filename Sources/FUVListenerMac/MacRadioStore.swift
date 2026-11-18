@@ -23,6 +23,8 @@ final class MacRadioStore: ObservableObject {
     private var itemStatus: NSKeyValueObservation?
     private var stationTrack: LiveTrack?
     private var playlist: [Song] = []
+    private var pausedAt: Date?
+    private let liveResumeWindow: TimeInterval = 30
 
     init() {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -165,27 +167,33 @@ final class MacRadioStore: ObservableObject {
     func togglePlayback() {
         if isPlaying {
             player.pause()
-            // Radio is live-only: discard the old playhead and buffered audio.
-            player.replaceCurrentItem(with: nil)
-            itemStatus = nil
+            pausedAt = .now
             isPlaying = false
             isLiveAudio = false
             return
         }
-        // Always create a fresh item so Play reconnects to the live broadcast.
-        let item = AVPlayerItem(url: WFUVService.highQualityStreamURL)
-        itemStatus = item.observe(\.status, options: [.new]) { [weak self] item, _ in
-            Task { @MainActor [weak self] in
-                guard let self, self.player.currentItem === item else { return }
-                if item.status == .failed {
-                    self.isPlaying = false
-                    self.isLiveAudio = false
-                    self.message = "Stream unavailable. Try again in a moment."
-                    self.player.replaceCurrentItem(with: nil)
+        let elapsed = pausedAt.map { Date.now.timeIntervalSince($0) } ?? .infinity
+        let needsLiveItem = player.currentItem == nil || elapsed < 0 ||
+            elapsed >= liveResumeWindow || player.currentItem?.status == .failed
+        pausedAt = nil
+        if needsLiveItem {
+            // An old paused item can resume from its buffer instead of the live edge.
+            itemStatus = nil
+            player.replaceCurrentItem(with: nil)
+            let item = AVPlayerItem(url: WFUVService.highQualityStreamURL)
+            itemStatus = item.observe(\.status, options: [.new]) { [weak self] item, _ in
+                Task { @MainActor [weak self] in
+                    guard let self, self.player.currentItem === item else { return }
+                    if item.status == .failed {
+                        self.isPlaying = false
+                        self.isLiveAudio = false
+                        self.message = "Stream unavailable. Try again in a moment."
+                        self.player.replaceCurrentItem(with: nil)
+                    }
                 }
             }
+            player.replaceCurrentItem(with: item)
         }
-        player.replaceCurrentItem(with: item)
         player.play()
         isPlaying = true
         isLiveAudio = player.timeControlStatus == .playing

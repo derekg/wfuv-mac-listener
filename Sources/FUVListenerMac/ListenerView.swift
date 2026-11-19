@@ -84,7 +84,7 @@ struct ListenerView: View {
     }
 
     private func configureWindow(_ window: NSWindow, collapsed: Bool, resize: Bool) {
-        let miniSize = NSSize(width: 390, height: 78)
+        let miniSize = NSSize(width: 420, height: 78)
         // Let the window cross between both size ranges before applying the new limits.
         window.contentMinSize = miniSize
         window.contentMaxSize = NSSize(width: 720, height: 950)

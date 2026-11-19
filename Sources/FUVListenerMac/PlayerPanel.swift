@@ -160,8 +160,15 @@ struct CollapsedPlayerPanel: View {
         return current
     }
 
+    private var isCurrentFavorite: Bool {
+        guard let track else { return false }
+        return radio.favorites.contains {
+            $0.favoriteID == Song.favoriteID(title: track.title, artist: track.artist)
+        }
+    }
+
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 9) {
             Button(action: onExpand) {
                 CoverArt(data: radio.imageDataForCurrent(),
                          title: track?.title ?? "WFUV",
@@ -188,6 +195,19 @@ struct CollapsedPlayerPanel: View {
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+
+            Button(action: radio.toggleCurrentFavorite) {
+                Image(systemName: isCurrentFavorite ? "heart.fill" : "heart")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(isCurrentFavorite ? Palette.red : .white)
+                    .frame(width: 26, height: 42)
+            }
+            .buttonStyle(.plain)
+            .disabled(track == nil)
+            .opacity(track == nil ? 0.4 : 1)
+            .accessibilityLabel(isCurrentFavorite ? "Remove current song from favorites" :
+                                "Add current song to favorites")
+            .help(isCurrentFavorite ? "Remove from favorites" : "Add to favorites")
 
             Button(action: radio.togglePlayback) {
                 Image(systemName: radio.isPlaying ? "pause.fill" : "play.fill")

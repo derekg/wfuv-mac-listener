@@ -10,7 +10,7 @@ struct FUVListenerMacApp: App {
             ListenerView()
                 .environmentObject(radio)
                 .frame(minWidth: 390, idealWidth: 620, maxWidth: 720,
-                       minHeight: 102, idealHeight: 760, maxHeight: 950)
+                       minHeight: 78, idealHeight: 760, maxHeight: 950)
         }
         .defaultSize(width: 620, height: 760)
         .windowResizability(.contentSize)

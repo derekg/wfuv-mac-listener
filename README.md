@@ -1,14 +1,14 @@
 # FUV Listener for Mac
 
-A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). The wider view keeps the live player visible while the song history scrolls below it. Collapse the whole window into a mini player with just the current song, artwork, and play/pause; expand it to browse history and favorites. The app remembers your choice. Favorite songs locally or open any track in Spotify. The app stays in the Dock while it runs and also has a **WFUV menu bar control** for play/pause, song details, refresh, and reopening the player window.
+A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). The frameless mini player shows the current song, artwork, and play/pause in a movable card. Expand it into a playlist-focused window with separate Playlist and Favorites tabs; your selected view is remembered. Favorite songs locally or open any track in Spotify. The app stays in the Dock while it runs and also has a **WFUV menu bar control** for play/pause, song details, refresh, and reopening the player window.
 
 This is an independent fan project made in support of WFUV, a great public radio resource. It is not affiliated with or endorsed by WFUV. [Support the station](https://wfuv.org/support).
 
 ## Screenshots
 
-| Wide player | Mini player | Favorites |
+| Playlist | Frameless mini player | Favorites |
 | :---: | :---: | :---: |
-| <img src="docs/images/player.jpg" alt="FUV Listener player with scrollable song history" width="220"> | <img src="docs/images/mini-player.jpg" alt="Mini FUV Listener window with artwork, song details, and play control" width="220"> | <img src="docs/images/favorites.jpg" alt="FUV Listener showing favorited songs and Spotify links" width="220"> |
+| <img src="docs/images/player.jpg" alt="FUV Listener with live player and scrollable playlist" width="220"> | <img src="docs/images/mini-player.jpg" alt="Frameless FUV Listener card with artwork, song details, and play control" width="220"> | <img src="docs/images/favorites.jpg" alt="FUV Listener favorites with Spotify links" width="220"> |
 
 [See the full player at compact window size](docs/images/compact.jpg).
 

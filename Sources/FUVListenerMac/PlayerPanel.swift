@@ -15,11 +15,11 @@ struct PlayerPanel: View {
         return current
     }
 
-    private var artSize: CGFloat { expanded ? 190 : tight ? 112 : 136 }
-    private var playSize: CGFloat { expanded ? 70 : tight ? 56 : 64 }
+    private var artSize: CGFloat { expanded ? 150 : tight ? 104 : 124 }
+    private var playSize: CGFloat { expanded ? 58 : tight ? 48 : 54 }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: tight ? 10 : 16) {
+        VStack(alignment: .leading, spacing: tight ? 9 : 12) {
             HStack(spacing: 8) {
                 Circle().fill(Palette.red).frame(width: 7, height: 7)
                 Text("NOW PLAYING · WFUV")
@@ -45,7 +45,7 @@ struct PlayerPanel: View {
             .font(.system(size: 10, weight: .bold, design: .rounded))
             .foregroundStyle(.white.opacity(0.78))
 
-            HStack(alignment: .center, spacing: expanded ? 24 : 16) {
+            HStack(alignment: .center, spacing: expanded ? 18 : 14) {
                 ZStack {
                     if expanded && radio.isLiveAudio && !reduceMotion {
                         RoundedRectangle(cornerRadius: 22)
@@ -65,13 +65,13 @@ struct PlayerPanel: View {
                         .shadow(color: .black.opacity(0.28), radius: 13, y: 9)
                 }
 
-                VStack(alignment: .leading, spacing: tight ? 4 : 8) {
+                VStack(alignment: .leading, spacing: tight ? 4 : 7) {
                     Text(track == nil ? "LIVE RADIO" : "ON THE AIR")
                         .font(.system(size: 9, weight: .bold, design: .rounded))
                         .tracking(1.6)
                         .foregroundStyle(.white.opacity(0.56))
                     Text(track?.title ?? "Listen live")
-                        .font(.system(size: expanded ? 30 : 24, weight: .bold, design: .serif))
+                        .font(.system(size: expanded ? 27 : 23, weight: .bold, design: .serif))
                         .foregroundStyle(.white)
                         .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(3)
@@ -107,14 +107,9 @@ struct PlayerPanel: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .frame(minHeight: artSize)
-
-            HStack {
-                Spacer()
                 Button(action: radio.togglePlayback) {
                     Image(systemName: radio.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: expanded ? 27 : 23, weight: .semibold))
+                        .font(.system(size: expanded ? 23 : 20, weight: .semibold))
                         .foregroundStyle(.white)
                         .offset(x: radio.isPlaying ? 0 : 2)
                         .frame(width: playSize, height: playSize)
@@ -124,10 +119,10 @@ struct PlayerPanel: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(radio.isPlaying ? "Pause WFUV radio" : "Play WFUV radio")
                 .help(radio.isPlaying ? "Pause live radio" : "Play live radio")
-                Spacer()
             }
+            .frame(minHeight: artSize)
         }
-        .padding(tight ? 17 : 22)
+        .padding(tight ? 16 : 18)
         .background {
             RoundedRectangle(cornerRadius: 25)
                 .fill(LinearGradient(colors: PlayerCardColors.colors(for: radio.currentKey),
@@ -158,6 +153,7 @@ struct PlayerPanel: View {
 struct CollapsedPlayerPanel: View {
     @ObservedObject var radio: MacRadioStore
     let onExpand: () -> Void
+    let onClose: () -> Void
 
     private var track: LiveTrack? {
         guard let current = radio.current, current.isMusic else { return nil }
@@ -205,20 +201,34 @@ struct CollapsedPlayerPanel: View {
             .accessibilityLabel(radio.isPlaying ? "Pause WFUV radio" : "Play WFUV radio")
 
             Button(action: onExpand) {
-                Image(systemName: "chevron.down")
+                Image(systemName: "arrow.up.left.and.arrow.down.right")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(.white.opacity(0.85))
-                    .frame(width: 26, height: 32)
+                    .frame(width: 21, height: 32)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Expand player")
-            .help("Expand player")
+            .accessibilityLabel("Open playlist and favorites")
+            .help("Open playlist and favorites")
+
+            Button(action: onClose) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.65))
+                    .frame(width: 16, height: 32)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Close player window")
+            .help("Close player window")
         }
         .padding(12)
         .background {
             RoundedRectangle(cornerRadius: 18)
                 .fill(LinearGradient(colors: PlayerCardColors.colors(for: radio.currentKey),
                                      startPoint: .topLeading, endPoint: .bottomTrailing))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 18)
+                        .strokeBorder(.white.opacity(0.15), lineWidth: 1)
+                }
         }
         .accessibilityElement(children: .contain)
     }

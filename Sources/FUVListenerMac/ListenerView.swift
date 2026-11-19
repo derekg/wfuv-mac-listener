@@ -19,17 +19,18 @@ struct ListenerView: View {
         GeometryReader { geometry in
             Group {
                 if playerCollapsed {
-                    CollapsedPlayerPanel(radio: radio) { setCollapsed(false) }
-                        .padding(12)
+                    CollapsedPlayerPanel(radio: radio, onExpand: { setCollapsed(false) },
+                                         onClose: { windowReference.window?.close() })
                 } else {
                     fullPlayer(in: geometry.size)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Palette.paper)
+            .background(playerCollapsed ? .clear : Palette.paper)
             .background(WindowObserver { window in
                 guard windowReference.window !== window else { return }
                 windowReference.window = window
+                windowReference.regularStyleMask = window.styleMask
                 configureWindow(window, collapsed: playerCollapsed, resize: playerCollapsed)
             })
         }
@@ -83,10 +84,22 @@ struct ListenerView: View {
     }
 
     private func configureWindow(_ window: NSWindow, collapsed: Bool, resize: Bool) {
-        let miniSize = NSSize(width: 390, height: 102)
+        let miniSize = NSSize(width: 390, height: 78)
         // Let the window cross between both size ranges before applying the new limits.
-        window.contentMinSize = NSSize(width: 390, height: 102)
+        window.contentMinSize = miniSize
         window.contentMaxSize = NSSize(width: 720, height: 950)
+
+        if collapsed {
+            window.styleMask = .borderless
+            window.isOpaque = false
+            window.backgroundColor = .clear
+            window.isMovableByWindowBackground = true
+        } else {
+            window.styleMask = windowReference.regularStyleMask
+            window.isOpaque = true
+            window.backgroundColor = .windowBackgroundColor
+            window.isMovableByWindowBackground = false
+        }
 
         if resize {
             let target = collapsed ? miniSize : NSSize(width: max(580, expandedContentSize.width),
@@ -140,6 +153,7 @@ struct ListenerView: View {
 
 private final class WeakWindowReference {
     weak var window: NSWindow?
+    var regularStyleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable, .resizable]
 }
 
 private struct WindowObserver: NSViewRepresentable {

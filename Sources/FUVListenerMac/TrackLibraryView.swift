@@ -2,24 +2,39 @@ import AppKit
 import SwiftUI
 
 private enum LibraryPage: String, CaseIterable {
-    case recent = "Recent"
+    case playlist = "Playlist"
     case favorites = "Favorites"
 }
 
 struct TrackLibraryView: View {
     @ObservedObject var radio: MacRadioStore
-    @State private var page: LibraryPage = .recent
+    @AppStorage("libraryPage") private var selectedPage = LibraryPage.playlist.rawValue
+
+    private var page: LibraryPage {
+        LibraryPage(rawValue: selectedPage) ?? .playlist
+    }
 
     private var songs: [Song] {
-        page == .recent ? Array(radio.recent.prefix(20)) : radio.favorites
+        page == .playlist ? Array(radio.recent.prefix(20)) : radio.favorites
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("Played on WFUV")
-                    .font(.system(size: 23, weight: .bold, design: .serif))
-                    .foregroundStyle(Palette.ink)
+            HStack(alignment: .bottom, spacing: 19) {
+                ForEach(LibraryPage.allCases, id: \.self) { option in
+                    Button { selectedPage = option.rawValue } label: {
+                        VStack(spacing: 5) {
+                            Text(option.rawValue)
+                                .font(.system(size: 23, weight: .bold, design: .serif))
+                                .foregroundStyle(page == option ? Palette.ink : Palette.muted)
+                            Capsule()
+                                .fill(page == option ? Palette.red : .clear)
+                                .frame(height: 3)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityAddTraits(page == option ? [.isSelected] : [])
+                }
                 Spacer()
                 Button {
                     Task { await radio.refresh() }
@@ -31,26 +46,12 @@ struct TrackLibraryView: View {
                 .foregroundStyle(Palette.red)
                 .disabled(radio.isRefreshing)
                 .help("Refresh songs")
+                .padding(.bottom, 8)
             }
-
-            HStack(spacing: 3) {
-                ForEach(LibraryPage.allCases, id: \.self) { option in
-                    Button(option.rawValue) { page = option }
-                        .buttonStyle(.plain)
-                        .font(.system(size: 11, weight: page == option ? .semibold : .medium))
-                        .foregroundStyle(page == option ? Palette.ink : Palette.muted)
-                        .frame(width: 82, height: 25)
-                        .background(page == option ? .white : .clear,
-                                    in: RoundedRectangle(cornerRadius: 8))
-                        .accessibilityAddTraits(page == option ? [.isSelected] : [])
-                }
-            }
-            .padding(3)
-            .background(Palette.ink.opacity(0.07), in: RoundedRectangle(cornerRadius: 10))
 
             ScrollView {
                 if songs.isEmpty {
-                    Text(page == .recent ? "Songs will appear when WFUV's feed responds." :
+                    Text(page == .playlist ? "Songs will appear when WFUV's feed responds." :
                             "Heart a song to keep it here.")
                         .font(.system(size: 13))
                         .foregroundStyle(Palette.muted)

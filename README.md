@@ -1,14 +1,16 @@
 # FUV Listener for Mac
 
-A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). It plays the live stream, shows the current song and recent playlist, lets you favorite songs locally, and opens a Spotify search for the current track. The app stays in the Dock while it runs and also has a **WFUV menu bar control** for play/pause, song details, refresh, and reopening the player window.
+A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). The live player stays visible while the song history scrolls below it. Favorite songs locally or open any track in Spotify. The app stays in the Dock while it runs and also has a **WFUV menu bar control** for play/pause, song details, refresh, and reopening the player window.
 
 This is an independent fan project made in support of WFUV, a great public radio resource. It is not affiliated with or endorsed by WFUV. [Support the station](https://wfuv.org/support).
 
 ## Screenshots
 
-| Live player | Favorites |
-| :---: | :---: |
-| <img src="docs/images/player.jpg" alt="FUV Listener playing WFUV with current song and recent tracks" width="320"> | <img src="docs/images/favorites.jpg" alt="FUV Listener showing a favorited song" width="320"> |
+| Compact player | Enlarged player | Favorites |
+| :---: | :---: | :---: |
+| <img src="docs/images/compact.jpg" alt="Compact FUV Listener player with fixed playback controls" width="220"> | <img src="docs/images/player.jpg" alt="Enlarged FUV Listener player with scrollable song history" width="220"> | <img src="docs/images/favorites.jpg" alt="FUV Listener showing favorited songs and Spotify links" width="220"> |
+
+See the [design review](docs/DESIGN_REVIEW.md) for the layout decisions and remaining limits.
 
 ## Build
 

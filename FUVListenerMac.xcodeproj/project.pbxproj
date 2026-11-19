@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A606B7AFAC81A726D8EDF7F /* TrackLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFAB9300AAFFA3561098BB3 /* TrackLibraryView.swift */; };
 		44486F9E59DDD7550713A0F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9AB93F24C46F77B71BD237D /* Assets.xcassets */; };
 		5CE00DAD19F9CF41C6A880AF /* ArtworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFCA50E5385B2D5B01E8DD /* ArtworkService.swift */; };
 		85AAD9BF38386EC8804819D5 /* ListenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A4D557F716E6904EC5361 /* ListenerView.swift */; };
 		90F3F0BC5FFE514980F2D90B /* FUVListenerMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D5756CBB03B5867F7438D /* FUVListenerMacApp.swift */; };
+		AE7F899D3534D92F2FEF0AD5 /* PlayerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606DE2F75EEBE7F8C5DC520 /* PlayerPanel.swift */; };
 		D3B96755003C713C2580F814 /* MacRadioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */; };
 		EA15A0CE5A17E7D604C8378E /* WFUVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DC9CE5A779769E94D9DC3 /* WFUVService.swift */; };
 /* End PBXBuildFile section */
@@ -21,6 +23,8 @@
 		6AEFCA50E5385B2D5B01E8DD /* ArtworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkService.swift; sourceTree = "<group>"; };
 		76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacRadioStore.swift; sourceTree = "<group>"; };
 		8D1A4D557F716E6904EC5361 /* ListenerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerView.swift; sourceTree = "<group>"; };
+		9CFAB9300AAFFA3561098BB3 /* TrackLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLibraryView.swift; sourceTree = "<group>"; };
+		C606DE2F75EEBE7F8C5DC520 /* PlayerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPanel.swift; sourceTree = "<group>"; };
 		C9304D2478AD2D6FF76D9E08 /* FUVListenerMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FUVListenerMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9AB93F24C46F77B71BD237D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,6 +37,8 @@
 				1F0D5756CBB03B5867F7438D /* FUVListenerMacApp.swift */,
 				8D1A4D557F716E6904EC5361 /* ListenerView.swift */,
 				76040AFBB4B58D803B3B0131 /* MacRadioStore.swift */,
+				C606DE2F75EEBE7F8C5DC520 /* PlayerPanel.swift */,
+				9CFAB9300AAFFA3561098BB3 /* TrackLibraryView.swift */,
 				096DC9CE5A779769E94D9DC3 /* WFUVService.swift */,
 			);
 			name = FUVListenerMac;
@@ -127,6 +133,8 @@
 				90F3F0BC5FFE514980F2D90B /* FUVListenerMacApp.swift in Sources */,
 				85AAD9BF38386EC8804819D5 /* ListenerView.swift in Sources */,
 				D3B96755003C713C2580F814 /* MacRadioStore.swift in Sources */,
+				AE7F899D3534D92F2FEF0AD5 /* PlayerPanel.swift in Sources */,
+				2A606B7AFAC81A726D8EDF7F /* TrackLibraryView.swift in Sources */,
 				EA15A0CE5A17E7D604C8378E /* WFUVService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,8 @@ enum Palette {
 
 struct ListenerView: View {
     @EnvironmentObject private var radio: MacRadioStore
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AppStorage("playerCollapsed") private var playerCollapsed = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -19,10 +21,20 @@ struct ListenerView: View {
                     .padding(.top, 18)
                     .padding(.bottom, 16)
 
-                PlayerPanel(radio: radio, expanded: expanded,
-                            tight: geometry.size.height < 630)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 16)
+                Group {
+                    if playerCollapsed {
+                        CollapsedPlayerPanel(radio: radio) { playerCollapsed = false }
+                    } else {
+                        PlayerPanel(radio: radio, expanded: expanded,
+                                    tight: geometry.size.height < 630) {
+                            playerCollapsed = true
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 16)
+                .animation(reduceMotion ? nil : .spring(response: 0.34, dampingFraction: 0.86),
+                           value: playerCollapsed)
 
                 if let message = radio.message {
                     Label(message, systemImage: "wifi.exclamationmark")

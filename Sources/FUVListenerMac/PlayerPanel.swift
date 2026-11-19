@@ -5,6 +5,7 @@ struct PlayerPanel: View {
     @ObservedObject var radio: MacRadioStore
     let expanded: Bool
     let tight: Bool
+    let onCollapse: () -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var glowing = false
@@ -31,6 +32,15 @@ struct PlayerPanel: View {
                 }
                 Text(radio.isLiveAudio ? "LIVE" : radio.isPlaying ? "CONNECTING" : "PAUSED")
                     .tracking(1.1)
+                Button(action: onCollapse) {
+                    Image(systemName: "chevron.up")
+                        .font(.system(size: 10, weight: .bold))
+                        .frame(width: 25, height: 24)
+                        .background(.white.opacity(0.09), in: RoundedRectangle(cornerRadius: 7))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Collapse player")
+                .help("Collapse player")
             }
             .font(.system(size: 10, weight: .bold, design: .rounded))
             .foregroundStyle(.white.opacity(0.78))
@@ -120,7 +130,7 @@ struct PlayerPanel: View {
         .padding(tight ? 17 : 22)
         .background {
             RoundedRectangle(cornerRadius: 25)
-                .fill(LinearGradient(colors: cardColors,
+                .fill(LinearGradient(colors: PlayerCardColors.colors(for: radio.currentKey),
                                      startPoint: .topLeading, endPoint: .bottomTrailing))
                 .overlay {
                     RoundedRectangle(cornerRadius: 25)
@@ -138,20 +148,91 @@ struct PlayerPanel: View {
         }
     }
 
-    private var cardColors: [Color] {
+    private func openSpotify(for track: LiveTrack) {
+        let song = Song(title: track.title, artist: track.artist,
+                        playedAt: track.playedAt ?? .now)
+        NSWorkspace.shared.open(song.spotifySearchURL)
+    }
+}
+
+struct CollapsedPlayerPanel: View {
+    @ObservedObject var radio: MacRadioStore
+    let onExpand: () -> Void
+
+    private var track: LiveTrack? {
+        guard let current = radio.current, current.isMusic else { return nil }
+        return current
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Button(action: onExpand) {
+                CoverArt(data: radio.imageDataForCurrent(),
+                         title: track?.title ?? "WFUV",
+                         artist: track?.artist ?? "90.7 FM",
+                         size: 54)
+            }
+            .buttonStyle(.plain)
+            .help("Expand player")
+            .accessibilityLabel("Expand player")
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(radio.isLiveAudio ? "LIVE · WFUV" : radio.isPlaying ? "CONNECTING" : "WFUV 90.7")
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                    .tracking(1.1)
+                    .foregroundStyle(.white.opacity(0.67))
+                Text(track?.title ?? "Listen live")
+                    .font(.system(size: 16, weight: .bold, design: .serif))
+                    .foregroundStyle(.white)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(track?.artist ?? "Independent music from New York")
+                    .font(.system(size: 11))
+                    .foregroundStyle(.white.opacity(0.74))
+                    .lineLimit(1)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Button(action: radio.togglePlayback) {
+                Image(systemName: radio.isPlaying ? "pause.fill" : "play.fill")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .offset(x: radio.isPlaying ? 0 : 1)
+                    .frame(width: 42, height: 42)
+                    .background(Palette.red, in: Circle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(radio.isPlaying ? "Pause WFUV radio" : "Play WFUV radio")
+
+            Button(action: onExpand) {
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .frame(width: 26, height: 32)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Expand player")
+            .help("Expand player")
+        }
+        .padding(12)
+        .background {
+            RoundedRectangle(cornerRadius: 18)
+                .fill(LinearGradient(colors: PlayerCardColors.colors(for: radio.currentKey),
+                                     startPoint: .topLeading, endPoint: .bottomTrailing))
+        }
+        .accessibilityElement(children: .contain)
+    }
+}
+
+private enum PlayerCardColors {
+    static func colors(for key: String?) -> [Color] {
         let palettes: [[Color]] = [
             [Color(red: 0.20, green: 0.31, blue: 0.39), Color(red: 0.10, green: 0.14, blue: 0.20)],
             [Color(red: 0.34, green: 0.24, blue: 0.29), Color(red: 0.14, green: 0.12, blue: 0.18)],
             [Color(red: 0.28, green: 0.32, blue: 0.24), Color(red: 0.13, green: 0.16, blue: 0.15)]
         ]
-        let index = (radio.currentKey ?? "wfuv").utf8.reduce(0) { ($0 + Int($1)) % palettes.count }
+        let index = (key ?? "wfuv").utf8.reduce(0) { ($0 + Int($1)) % palettes.count }
         return palettes[index]
-    }
-
-    private func openSpotify(for track: LiveTrack) {
-        let song = Song(title: track.title, artist: track.artist,
-                        playedAt: track.playedAt ?? .now)
-        NSWorkspace.shared.open(song.spotifySearchURL)
     }
 }
 

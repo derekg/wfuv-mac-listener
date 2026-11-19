@@ -15,9 +15,10 @@ The goal is a small radio player that keeps the live controls in view while list
 - Live radio has no seekable track progress, so the player uses a live indicator instead of a misleading progress bar.
 - The large red play/pause control is the primary action. Favorites and Spotify remain beside the song information.
 - The history pane uses a separate scroll view so the player never scrolls away.
+- The chevron collapses the player to a fixed strip with artwork, song details, and play/pause. The choice persists across launches and can be reversed without losing the history view.
 - The window is bounded to 390–720 points wide and 500–950 points tall. Album art and motion grow in the enlarged layout.
 
 ## Remaining limits
 
-- A very short window shows only one history row at once, with the rest available by scrolling.
+- A very short window shows only one history row with the full player; the collapsed strip exposes several rows without moving the playback control.
 - WFUV's playlist metadata can lag the live audio, and some recordings have no verified album art.

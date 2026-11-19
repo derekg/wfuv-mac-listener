@@ -9,10 +9,10 @@ struct FUVListenerMacApp: App {
         WindowGroup("FUV Listener", id: "listener") {
             ListenerView()
                 .environmentObject(radio)
-                .frame(minWidth: 390, idealWidth: 470, maxWidth: 720,
-                       minHeight: 500, idealHeight: 720, maxHeight: 950)
+                .frame(minWidth: 390, idealWidth: 620, maxWidth: 720,
+                       minHeight: 102, idealHeight: 760, maxHeight: 950)
         }
-        .defaultSize(width: 470, height: 720)
+        .defaultSize(width: 620, height: 760)
         .windowResizability(.contentSize)
         .commands {
             CommandGroup(replacing: .newItem) { }

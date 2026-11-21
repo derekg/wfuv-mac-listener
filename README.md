@@ -4,6 +4,10 @@ A small, native macOS player for [WFUV 90.7 FM](https://wfuv.org). The frameless
 
 This is an independent fan project made in support of WFUV, a great public radio resource. It is not affiliated with or endorsed by WFUV. [Support the station](https://wfuv.org/support).
 
+## Download
+
+Download the [latest Mac release](https://github.com/derekg/wfuv-mac-listener/releases/latest), expand the ZIP, and move **FUV Listener.app** to Applications. Version 1.0.0 supports Apple silicon Macs running macOS 14 or later. The release is signed and notarized by Apple.
+
 ## Screenshots
 
 | Playlist | Frameless mini player | Favorites |

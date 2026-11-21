@@ -18,6 +18,8 @@ final class MacRadioStore: ObservableObject {
     private let artworkService: ArtworkService
     private var artworkLoading = Set<String>()
     private var artworkOrder: [String] = []
+    private var artworkBytes = 0
+    private let artworkByteLimit = 12_000_000
     private var pollTask: Task<Void, Never>?
     private var playStatus: NSKeyValueObservation?
     private var itemStatus: NSKeyValueObservation?
@@ -135,14 +137,17 @@ final class MacRadioStore: ObservableObject {
     }
 
     private func keepArtwork(_ data: Data, for key: String) {
-        artwork[key] = data
+        var updated = artwork
+        artworkBytes += data.count - (updated[key]?.count ?? 0)
+        updated[key] = data
         artworkOrder.removeAll { $0 == key }
         artworkOrder.append(key)
-        while artworkOrder.count > 24 {
-            let index = artworkOrder.firstIndex { $0 != currentKey } ?? 0
+        while artworkOrder.count > 24 || artworkBytes > artworkByteLimit {
+            guard let index = artworkOrder.firstIndex(where: { $0 != currentKey }) else { break }
             let removed = artworkOrder.remove(at: index)
-            artwork.removeValue(forKey: removed)
+            artworkBytes -= updated.removeValue(forKey: removed)?.count ?? 0
         }
+        artwork = updated
     }
 
     private func loadArtwork(title: String, artist: String,
@@ -152,12 +157,13 @@ final class MacRadioStore: ObservableObject {
         artworkLoading.insert(key)
         Task { [weak self] in
             guard let self else { return }
-            if let cached = await artworkService.cachedImageData(title: title, artist: artist) {
+            let cached = await artworkService.cachedImageData(title: title, artist: artist)
+            if let cached {
                 keepArtwork(cached, for: key)
             }
             if let found = await artworkService.imageData(title: title, artist: artist,
                                                           preferredURL: preferredURL,
-                                                          preferredAlbum: album) {
+                                                          preferredAlbum: album), found != cached {
                 keepArtwork(found, for: key)
             }
             artworkLoading.remove(key)

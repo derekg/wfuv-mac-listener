@@ -15,7 +15,7 @@ The goal is a small radio player that keeps the live controls in view while list
 - Live radio has no seekable track progress, so the player uses a live indicator instead of a misleading progress bar.
 - The red play/pause control is the primary action. Favorites and Spotify remain beside the song information in the expanded player.
 - The history pane uses a separate scroll view so the player never scrolls away.
-- The chevron collapses the entire window to a frameless 420 × 78 point card with artwork, song details, a favorite heart, play/pause, expand, and close controls. The heart uses the same local favorites as the wide view and is disabled when no song is identified. Expanding restores the normal window chrome and the last selected Playlist or Favorites tab. The mode persists across launches.
+- The chevron collapses the entire window to a frameless 420 × 78 point card inside a transparent 444 × 104 point window. Balanced 18-point corners, an inset, and a soft shadow make all four corners visible. The card includes artwork, song details, a favorite heart, play/pause, expand, and close controls. The heart uses the same local favorites as the wide view and is disabled when no song is identified. Expanding restores the normal window chrome and the last selected Playlist or Favorites tab. The mode persists across launches.
 - The expanded player puts play/pause beside the artwork to make room for more playlist rows. Each favorite still has a Spotify link that opens outside the app.
 - The wide window is resizable from 390–720 points wide and 500–950 points tall. Album art and motion grow in the enlarged layout.
 

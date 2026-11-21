@@ -245,6 +245,7 @@ struct CollapsedPlayerPanel: View {
             RoundedRectangle(cornerRadius: 18)
                 .fill(LinearGradient(colors: PlayerCardColors.colors(for: radio.currentKey),
                                      startPoint: .topLeading, endPoint: .bottomTrailing))
+                .shadow(color: .black.opacity(0.23), radius: 10, y: 5)
                 .overlay {
                     RoundedRectangle(cornerRadius: 18)
                         .strokeBorder(.white.opacity(0.15), lineWidth: 1)

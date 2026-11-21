@@ -12,7 +12,7 @@ This is an independent fan project made in support of WFUV, a great public radio
 
 [See the full player at compact window size](docs/images/compact.jpg).
 
-See the [design review](docs/DESIGN_REVIEW.md) for the layout decisions and remaining limits.
+See the [design review](docs/DESIGN_REVIEW.md) for the layout decisions and the [performance review](docs/PERFORMANCE_REVIEW.md) for measured resource use and cache bounds.
 
 ## Build
 

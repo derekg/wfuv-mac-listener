@@ -21,6 +21,8 @@ struct ListenerView: View {
                 if playerCollapsed {
                     CollapsedPlayerPanel(radio: radio, onExpand: { setCollapsed(false) },
                                          onClose: { windowReference.window?.close() })
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 13)
                 } else {
                     fullPlayer(in: geometry.size)
                 }
@@ -84,7 +86,7 @@ struct ListenerView: View {
     }
 
     private func configureWindow(_ window: NSWindow, collapsed: Bool, resize: Bool) {
-        let miniSize = NSSize(width: 420, height: 78)
+        let miniSize = NSSize(width: 444, height: 104)
         // Let the window cross between both size ranges before applying the new limits.
         window.contentMinSize = miniSize
         window.contentMaxSize = NSSize(width: 720, height: 950)

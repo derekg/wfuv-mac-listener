@@ -6,6 +6,9 @@ settings:
     MACOSX_DEPLOYMENT_TARGET: '14.0'
     SWIFT_VERSION: '5.0'
     CODE_SIGNING_ALLOWED: NO
+    MARKETING_VERSION: '1.0.0'
+    CURRENT_PROJECT_VERSION: '1'
+    ENABLE_HARDENED_RUNTIME: YES
 targets:
   FUVListenerMac:
     type: application

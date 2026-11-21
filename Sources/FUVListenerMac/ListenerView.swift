@@ -21,8 +21,7 @@ struct ListenerView: View {
                 if playerCollapsed {
                     CollapsedPlayerPanel(radio: radio, onExpand: { setCollapsed(false) },
                                          onClose: { windowReference.window?.close() })
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 13)
+                        .padding(8)
                 } else {
                     fullPlayer(in: geometry.size)
                 }
@@ -33,6 +32,7 @@ struct ListenerView: View {
                 guard windowReference.window !== window else { return }
                 windowReference.window = window
                 windowReference.regularStyleMask = window.styleMask
+                windowReference.regularHasShadow = window.hasShadow
                 configureWindow(window, collapsed: playerCollapsed, resize: playerCollapsed)
             })
         }
@@ -86,18 +86,20 @@ struct ListenerView: View {
     }
 
     private func configureWindow(_ window: NSWindow, collapsed: Bool, resize: Bool) {
-        let miniSize = NSSize(width: 444, height: 104)
+        let miniSize = NSSize(width: 436, height: 94)
         // Let the window cross between both size ranges before applying the new limits.
         window.contentMinSize = miniSize
         window.contentMaxSize = NSSize(width: 720, height: 950)
 
         if collapsed {
             window.styleMask = .borderless
+            window.hasShadow = false
             window.isOpaque = false
             window.backgroundColor = .clear
             window.isMovableByWindowBackground = true
         } else {
             window.styleMask = windowReference.regularStyleMask
+            window.hasShadow = windowReference.regularHasShadow
             window.isOpaque = true
             window.backgroundColor = .windowBackgroundColor
             window.isMovableByWindowBackground = false
@@ -156,6 +158,7 @@ struct ListenerView: View {
 private final class WeakWindowReference {
     weak var window: NSWindow?
     var regularStyleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable, .resizable]
+    var regularHasShadow = true
 }
 
 private struct WindowObserver: NSViewRepresentable {
